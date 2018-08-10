@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+        <title>MoM</title>
+    <link rel="stylesheet" href="css/bootstrap3.3.5.min.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body>
+ <div class="container ct">
+      <h1 class="ct"><img class="big-logo" src="assets/resilient-logo.png" /></h1>
+      <div class="hero-unit ct">
+        
+       <p class="welcome">Welcome back!</p>
+        
+        <div id="password-login">
+          <form class ="loginform" method="post" action="UserLoginServlet"  autocomplete="off">
+            <p class="password-item"><input class="xl email" type="text" name="uname" placeholder="Email" value="" autocomplete="off" required/></p>
+            <p class="password-item"><input class="xl password" type="password" name="upwd" placeholder="Password" autocomplete="off" required/></p>
+            <p><input type="submit" value="Log in to your account" class="btn btn-large xl submitxl"/></p>
+            <!-- <input type="hidden" name="next" value=""/>
+            <input type="hidden" name="csrf" value="ced0afb0d0d4e241c9daaeec0c05c21d"/> -->
+          </form>
+        </div>
+      </div>
+
+      <div class="ct">
+        <a>Forgot your password?</a>
+      </div>
+    <footer>
+      <p class="ct">&#169; Copyright IBM Corporation 2017</p>
+    </footer>
+    </div>
+</body>
+
+
+</html>

@@ -1,0 +1,179 @@
+ body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    margin: 10px;
+    line-height: 1.2em;
+    color: #555;
+}
+header {
+    background: url('../images/agriculturefarmBanner.jpg') no-repeat;
+    color:white;
+    height:80px;
+    text-align: center;
+}
+h3{
+    font-size: 120%;
+}
+.title{
+    font-size: 150%;
+}
+.welcome{
+    font-size: 90%;
+}
+.page {
+    background: #f1f1f1;
+}
+.dialogHeader{
+    font-size: 120%;
+}
+.viewFormTable {
+    border: 0px;
+    font-size: 80%;
+    width: auto;
+}
+
+.mainTable {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 80%;
+    width: auto;
+}
+.mainTable th {
+    background-color: #f2f0d5;
+    padding: 5px;
+    text-align: left;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.mainTable tr {
+    background-color: #f5f5f5;
+}
+
+.mainTable td {
+    padding: 5px;
+    text-align: left;
+    border: 1px solid black;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+.subTable {
+   border: 0px solid black;
+   border-collapse: collapse;
+   font-size: 95%;
+   width: auto;
+}
+.subTable th {
+    background-color: #f5f5f5;
+    padding: 5px;
+    text-align: left;
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+
+.subTable tr {
+    background-color: #f5f5f5;
+    border: 1px solid black;
+}
+
+.subTable td {
+    padding: 5px;
+    text-align: left;
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+
+.emptyFarmRecord {
+    background-color: #f3966d;
+}
+
+button, .formButton {
+  display: inline-block;
+  padding: 5px 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+button:hover, .formButton:hover {background-color: #3e8e41}
+
+button:active:enabled, .formButton:active:enabled {
+  background-color: #3e8e41;
+}
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loginform {
+    border: 3px solid #f1f1f1;
+}
+.container {
+    padding: 16px;
+    background: #cbdbb8;
+    text-align: left;
+}
+.bluemixlogo {
+    height: auto;
+    width: auto;
+}
+.logout {
+    color:white;
+    font-size: 90%;
+}
+input[type=text], input[type=password] {
+    padding: 5px 5px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #cbdbb8;
+    box-sizing: border-box;
+}
+span.psw {
+    float: right;
+}
+
+/* Style the list */
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #cbdbb8;
+    background-color: #f1f1f1;
+    font-size:90%;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: #555;
+    text-align: center;
+    padding: 7px 12px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {background-color: #ddd;}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {background-color: #cbdbb8;}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #cbdbb8;
+    border-top: none;
+}

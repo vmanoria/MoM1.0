@@ -1,0 +1,261 @@
+<!doctype html>
+
+<html lang="en" ng-app="resilientMomApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+    <title>MoM</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <style type="text/css">
+    body {
+      padding-top: 50px;
+      padding-bottom: 40px;
+      
+      
+    }
+  </style>
+  <link rel="shortcut icon" href="assets/favicon.ico?v=2" />
+          
+  <link rel="stylesheet" href="css/font-awesome-4.2.0.css">
+  <link rel="stylesheet" href="css/application.css?27.2.44">
+  </head>
+  <body  ng-controller="listdata">
+	<div role="main" class="container theme-showcase">
+		<div  id="navigation">
+			<div class="navigation-inner">
+			<nav class="navbar navbar-fixed-top navbar-inverse">
+				<div class="container">
+					<ul class="nav navbar-nav" >
+						<li>
+							<a class="brand" href="/">
+								<img src="assets/resilient-logo-blend.png">
+							</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="dashboard.html">
+							   Analytics Dashboard							   
+							</a>
+							
+							
+						</li>
+						<li class="active">						
+							<a id="nav-incident" href="incidentListView.html" >List Incident</a>
+						</li>
+						</ul>
+					<ul class="rt-side-controls">
+						<li style="display:none">
+							<div>
+								
+							</div>
+						</li>
+						<li class="dropdown notification-dropdown open">
+							
+							
+						</li>
+						
+						<li class="dropdown user-menu">
+							<a class="dropdown-toggle" data-toggle="dropdown" arial-expanded="true">
+								<div class="rt user">
+									<span class="email">{{loginUser}}</span>									
+									<a id="tabLogout" href="index.html">Logout</a>
+								</div>
+								<b class="caret"></b>
+							</a>
+							
+							
+						</li>
+					</ul>
+				</div>
+			</nav>
+			</div>
+		</div>
+		<div  class="container">
+			<div id="root">
+				<div class="filterbar-region" >
+					<div id="filterbar">
+						{{headerincident}}
+						
+						<span ng-repeat="org in orgs">
+						<input ng-show="isOnlyOneOrg" id="{{org}}" type="checkbox" value="{{org}}" ng-checked="selection.indexOf(org) > -1" ng-click="toggleSelection(org)" />
+					    <!--  <input type="checkbox" name="selectedorgs" ng-click="getSelectedOrg();" ng-model="selectedorgs" value="{{org}}"/> -->
+					     {{org}}
+					     </input>
+					  </span>	
+					 
+
+						
+   				 </div>
+   			   </div>
+   			   <div class="filterbar-region">
+   			   		<div>
+   			   			<div id="filterbar">
+   			   					Filter by Status  :  
+										<select ng-model="search.status" >		
+											<option value="" disabled selected>-- Select Status --</option>   			   						
+											<option  value="active">Active</option>
+											<option  value="Inactive">Inactive</option>
+										</select>
+   			   							<!-- <select style="display:none;" multiple="multiple">
+   			   								<option selected="selected" value="1">Confirmed</option>
+   			   								<option selected ="selected" value="0">Unconfirmed</option>
+   			   							</select>
+   			   							<div class="btn-grp">
+   			   								<button class=multiselect dropdown-toggle btn btn-default btn-raw" aria-expanded="false" 
+   			   								tittle="Confirmed,Unconfirmed" type="button" data-toggle="dropdown">Incident Disposition :Confirmed,Unconfirmed</button>
+   			   								<ul class="multiselect-container dropdown-menu" style="max-height: 300px: overflow-y:auto; overflow-x:hidden;">
+   			   								<div class="input-search"></div>
+   			   								<li class="active"></li>
+   			   								<li class="active"></li>
+   			   								</ul>
+   			   							</div> -->
+   			   			</div>
+   			   		</div>
+   			   </div>
+   			   <div class="row">
+                  <div class="page-header" >
+                          <h3 id="tables" style="margin-left:12px"> All Incidents
+                            <button class="btn confirm sucess" ng-click="refresh();">Refresh</button>
+                           </h3>
+                      </div>
+                   </div>
+			      <div class="" style="margin-top:50px;">
+			      	<div class="row">
+				       
+							
+							
+								<div class="col-sm-12">
+								<table  class="table table-hover dataTable no-footer" role="grid" style="width: 100%;" width="100%">
+								
+									<thead>
+										<tr   role="row">
+											<!-- <th ng-click="sort('id')" ng-dblclick="showFilters = ! showFilters">Id
+												<span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+											</th> -->
+											<th style="width:55px;" colspan="1" rowspan="1" data-column-index="1" ng-click="sort('attack_type')">Attack Type
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='attack_type'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th style="width:55px;" colspan="1" rowspan="1" data-column-index="2" ng-click="sort('categories')">Categories
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='categories'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th style="width:55px;" colspan="1" rowspan="1" data-column-index="3" ng-click="sort('network_zone')">Network Zone
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='network_zone'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th style="width:30px;" colspan="1" rowspan="1" data-column-index="4" ng-click="sort('id')">Id
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+											<th style="width:192px;" colspan="1" rowspan="1" data-column-index="5" ng-click="sort('name')">Name
+												<span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+											</th>
+											<th style="width:242px;" colspan="1" rowspan="1" data-column-index="6"  ng-click="sort('description')">Description
+												<span class="glyphicon sort-icon" ng-show="sortKey=='description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+											</th>
+											<th style="width:89px;" colspan="1" rowspan="1" data-column-index="7" ng-click="sort('date_discovered')">Date Discovered
+												<span class="glyphicon sort-icon" ng-show="sortKey=='date_discovered'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+											</th>
+				                            <th style="width:54px;" colspan="1" rowspan="1" data-column-index="8"  ng-click="sort('due_date')">Due Date
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='due_date'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th style="width:71px;" colspan="1" rowspan="1" data-column-index="9" ng-click="sort('date_created')">Date Created
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='date_created'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            
+				                            <th style="width:34px;" colspan="1" rowspan="1" data-column-index="10" ng-click="sort('owner')">Owner
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='owner'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th style="width:45px;" colspan="1" rowspan="1" data-column-index="11" ng-click="sort('phase')">Phase
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='phase'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            
+				                            <th style="width:35px;" colspan="1" rowspan="1" data-column-index="12" ng-click="sort('severity')">Severity
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='severity'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th style="width:35px;" colspan="1" rowspan="1" data-column-index="13" ng-click="sort('status')">Status
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='status'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+				                            <th ng-show="isOnlyOneOrg" style="width:45px;" colspan="1" rowspan="1" data-column-index="14" ng-click="sort('oraganisation')">Organisation
+				                                <span class="glyphicon sort-icon" ng-show="sortKey=='oraganisation'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+				                            </th>
+										</tr>
+									</thead>
+									<tbody>
+				                        <tr>
+				                        	<td><input style="width:55px;" colspan="1" rowspan="1" data-column-index="1" ng-model="search.attack_type"></td>
+				                        	<td><input style="width:55px;" colspan="1" rowspan="1" data-column-index="2" ng-model="search.categories"></td>
+				                        	<td><input style="width:55px;" colspan="1" rowspan="1" data-column-index="3" ng-model="search.network_zone"></td>
+				                            <td><input style="width:30px;" colspan="1" rowspan="1" data-column-index="4" ng-model="search.id"></td>
+				                            <td><input style="width:192px;" colspan="1" rowspan="1" data-column-index="5" ng-model="search.name"></td>
+				                            <td><input style="width:242px;" colspan="1" rowspan="1" data-column-index="6" ng-model="search.description"></td>
+				                            <td><input style="width:89px;" colspan="1" rowspan="1" data-column-index="7"  ng-model="search.date_discovered"></td>
+				                            <td><input style="width:54px;" colspan="1" rowspan="1" data-column-index="8" ng-model="search.due_date"></td>
+				                            <td><input style="width:71px;" colspan="1" rowspan="1" data-column-index="9" ng-model="search.date_created"></td>				                           
+				                            <td><input style="width:75px;" colspan="1" rowspan="1" data-column-index="10" ng-model="search.owner"></td>
+				                            <td><input style="width:75px;" colspan="1" rowspan="1" data-column-index="11" ng-model="search.phase"></td>
+				                            <td><input style="width:75px;" colspan="1" rowspan="1" data-column-index="12" ng-model="search.severity"></td>
+				                            <td><input style="width:75px;" colspan="1" rowspan="1" data-column-index="13" ng-model="search.status"></td>
+				                            <td ng-show="isOnlyOneOrg">
+				                            <input style="width:99px;" colspan="1" rowspan="1" data-column-index="14" ng-model="search.oraganisation">
+				                            </td>
+				                        </tr>
+										<tr  role="row" dir-paginate="user in users|orderBy:sortKey:!reverse|filter:search|itemsPerPage:5">
+											<td>
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.attack_type}}</div></td>
+											<td>
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.categories}}</div></td>
+											<td>
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.network_zone}}</div></td>
+											<td>
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%"><a href="" ng-click="openChildWindow(user.incidentUrl,user.orgUrl,user.id,user.oraganisation)">{{user.id}}</a></div></td>
+											<td>
+											
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.name}}</div></td>
+											<td>
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.description}}</div></td>
+											<td>
+											<div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.date_discovered}}</div></td>
+				                            <td>
+				                            <div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.due_date}}</div></td>
+				                            <td>
+				                            <div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.date_created}}</div>
+				                            </td>		
+				                            <td>		                           
+				                            <div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100% ">{{user.owner}}</div></td>
+				                            <td>
+				                            <div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.phase}}</div></td>
+				                            <td>
+				                           		<div ng-if="user.severity === 'High'" class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%; color: red; background: transparent;">{{user.severity}}</div>
+				                            	<div ng-if="user.severity === 'Medium'" class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%; color: blue; background: transparent;">{{user.severity}}</div>
+				                            	<div ng-if="user.severity === 'Low'" class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%; color: green; background: transparent;">{{user.severity}}</div></td>
+				                            <td>
+				                            <div ng-if="user.status === 'Active'" class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%; color: green; background: transparent;">{{user.status}}</div>
+				                            <div ng-if="user.status === 'Inactive'" class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%; color: blue; background: transparent;">{{user.status}}</div></td>
+				                             <td ng-show="isOnlyOneOrg">
+				                            <div class="rte rte-frame rte-frame-cutoff" style="width: 100%;min-height: 100%; max-height: 100%">{{user.oraganisation}}</a></div></td>
+				                            
+										</tr>
+									</tbody>
+								</table> 
+								</div>
+								<dir-pagination-controls
+									max-size="5"
+									direction-links="true"
+									boundary-links="true" >
+								</dir-pagination-controls>
+							</div>
+						</div>
+							<div>
+								Link to <a href="https://resilient" target="202">Resilient</a>.
+							</div>
+						</div>
+					</div>	
+			      
+      	</div>
+    </div>
+		<script src="lib/angular/angular.js"></script>
+		<script src="lib/dirPagination.js"></script>
+		<script src="app/app.js"></script>
+  </body>
+</html>
