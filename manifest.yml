@@ -1,0 +1,10 @@
+applications:
+- path: target/ResMomApp.war
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: ResMomApp
+  host: ResMomApp
+  disk_quota: 1024M
+  services:
+  - dashDB-zz
